@@ -1,0 +1,12 @@
+{
+  "extends": "rackt",
+  "env": {
+    "mocha": true
+  },
+  "rules" : {
+    "arrow-parens": [2, "always"]
+  },
+  "plugins": [
+    "mocha"
+  ]
+}

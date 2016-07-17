@@ -1,0 +1,23 @@
+{
+  "name": "mobile-coverage-russia",
+  "version": "0.0.0",
+  "description": "Downoads and extracts mobile coverage data for Russian mobile operators",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha --recursive modules -r babel-polyfill -w --compilers js:babel-register"
+  },
+  "author": "Vladimir Danchenkov <vladimir.danchenkov@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-eslint": "^6.1.2",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.0.1",
+    "eslint-config-rackt": "^1.1.1",
+    "eslint-plugin-mocha": "^4.0.0"
+  }
+}
