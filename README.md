@@ -24,24 +24,23 @@ Calculate average levels in square area
 
     import { toGlobalPixels, mts } from 'mobile-coverage-russia
     
-    const zoom = 15 
-    const westNorth = [ 50.110838, 53.203667 ]
-    const eastSouth = [ 50.110898, 53.203697 ]
-    
+    const zoom = 15
+    const westNorth = [ 50.110038, 53.203997 ]
+    const eastSouth = [ 50.110998, 53.203067 ]
+
     const coverage = mts(zoom)
-    nw = toGlobalPixels(zoom, westNorth)
-    se = toGlobalPixels(zoom, eastSouth)
+    const nw = toGlobalPixels(zoom, westNorth)
+    const se = toGlobalPixels(zoom, eastSouth)
 
-    var levels = [0, 0, 0, 0]
-    for(let x = nw[1]; x < se[1]; x++) {
-      for(let y = nw[2]; y < se[2]; y++) { 
-        levels[coverage(zoom, pixel)]++
+    const levels = [ 0, 0, 0, 0 ]
+    for(let x = nw[0]; x < se[0]; x++) {
+      for(let y = nw[1]; y < se[1]; y++) {
+        levels[coverage([ x, y ])]++
       }
-    } 
-    
-    var square = (se[1] - nw[1]) * (se[2] - nw[2])         
-    levels.map(l => l / square)
-
+    }
+    const square = (se[1] - nw[1]) * (se[2] - nw[2])
+    levels.map((l) => l / square)
+                                          
 Library tries to use fetch from window or global objects. If you do not have it there, provide [fetch](https://fetch.spec.whatwg.org/) compatible function.
  
     const coverage = mts(10)
