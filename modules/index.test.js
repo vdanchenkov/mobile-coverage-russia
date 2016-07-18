@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { lonLatToPixel, mts } from './index'
+import { lonLatToPixel, mts3G } from './index'
 
 describe('examples from readme', () => {
   describe('first', () => {
@@ -7,8 +7,8 @@ describe('examples from readme', () => {
       const zoom = 15
       const lngLat = [ 50.110838, 53.203667 ]
 
-      const coverage = mts(zoom)
-      coverage(lonLatToPixel(zoom, lngLat))
+      const coverage = mts3G(zoom)
+      const level = coverage(lonLatToPixel(zoom, lngLat))
     })
   })
 
@@ -18,18 +18,18 @@ describe('examples from readme', () => {
       const westNorth = [ 50.110038, 53.203997 ]
       const eastSouth = [ 50.110998, 53.203067 ]
 
-      const coverage = mts(zoom)
+      const coverage = mts3G(zoom)
       const nw = lonLatToPixel(zoom, westNorth)
       const se = lonLatToPixel(zoom, eastSouth)
 
-      const levels = [ 0, 0, 0, 0 ]
+      let level = 0
       for(let x = nw[0]; x < se[0]; x++) {
         for(let y = nw[1]; y < se[1]; y++) {
-          levels[coverage([ x, y ])]++
+          level = level + coverage([ x, y ])
         }
       }
       const square = (se[1] - nw[1]) * (se[2] - nw[2])
-      levels.map((l) => l / square)
+      const averageLevel = level / square
     })
   })
 })

@@ -1,11 +1,11 @@
 import { lonLatToPixel, meterToPixel } from './conversions'
-import { mts } from './operators'
+import { mts3G } from './operators'
 import coverage from './coverage'
 
-const mtsCoverage = (zoom) => coverage(mts, zoom)
+const mts3GCoverage = (zoom) => coverage(mts3G, zoom)
 
 export {
   lonLatToPixel,
   meterToPixel,
-  mtsCoverage as mts
+  mts3GCoverage as mts3G
 }

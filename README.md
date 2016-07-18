@@ -10,38 +10,38 @@ Major mobile operators in Russia provide coverage maps in a form of tiles design
 
 ## Usage
 
-    import { toGlobalPixels, mts } from 'mobile-coverage-russia
+    import { toGlobalPixels, mts3G } from 'mobile-coverage-russia
     
     const zoom = 15 
     const lngLat = [ 50.110838, 53.203667 ]
     const radius = '100m'
     
     // constructed object will maintain data cache 
-    const coverage = mts(zoom)
+    const coverage = mts3G(zoom)
     coverage(toGlobalPixels(zoom, lngLat))
                 
 Calculate average levels in square area
 
-    import { toGlobalPixels, mts } from 'mobile-coverage-russia
+    import { toGlobalPixels, mts3G } from 'mobile-coverage-russia
     
     const zoom = 15
     const westNorth = [ 50.110038, 53.203997 ]
     const eastSouth = [ 50.110998, 53.203067 ]
-
-    const coverage = mts(zoom)
-    const nw = toGlobalPixels(zoom, westNorth)
-    const se = toGlobalPixels(zoom, eastSouth)
-
-    const levels = [ 0, 0, 0, 0 ]
+    
+    const coverage = mts3G(zoom)
+    const nw = lonLatToPixel(zoom, westNorth)
+    const se = lonLatToPixel(zoom, eastSouth)
+    
+    let level = 0
     for(let x = nw[0]; x < se[0]; x++) {
       for(let y = nw[1]; y < se[1]; y++) {
-        levels[coverage([ x, y ])]++
+        level = level + coverage([ x, y ])
       }
     }
     const square = (se[1] - nw[1]) * (se[2] - nw[2])
-    levels.map((l) => l / square)
+    const averageLevel = level / square
                                           
 Library tries to use fetch from window or global objects. If you do not have it there, provide [fetch](https://fetch.spec.whatwg.org/) compatible function.
  
-    const coverage = mts(10)
+    const coverage = mts3G(10)
     mts.useFetch(fetch)
