@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { toGlobalPixels, mts } from './index'
+import { lonLatToPixel, mts } from './index'
 
 describe('examples from readme', () => {
   describe('first', () => {
@@ -8,7 +8,7 @@ describe('examples from readme', () => {
       const lngLat = [ 50.110838, 53.203667 ]
 
       const coverage = mts(zoom)
-      coverage(toGlobalPixels(zoom, lngLat))
+      coverage(lonLatToPixel(zoom, lngLat))
     })
   })
 
@@ -19,8 +19,8 @@ describe('examples from readme', () => {
       const eastSouth = [ 50.110998, 53.203067 ]
 
       const coverage = mts(zoom)
-      const nw = toGlobalPixels(zoom, westNorth)
-      const se = toGlobalPixels(zoom, eastSouth)
+      const nw = lonLatToPixel(zoom, westNorth)
+      const se = lonLatToPixel(zoom, eastSouth)
 
       const levels = [ 0, 0, 0, 0 ]
       for(let x = nw[0]; x < se[0]; x++) {

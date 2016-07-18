@@ -1,10 +1,11 @@
-import toGlobalPixels from './toGlobalPixels'
+import { lonLatToPixel, meterToPixel } from './conversions'
 import { mts } from './operators'
 import coverage from './coverage'
 
 const mtsCoverage = (zoom) => coverage(mts, zoom)
 
 export {
-  toGlobalPixels,
+  lonLatToPixel,
+  meterToPixel,
   mtsCoverage as mts
 }
