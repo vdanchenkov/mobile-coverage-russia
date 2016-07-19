@@ -4,7 +4,8 @@
   "description": "Downoads and extracts mobile coverage data for Russian mobile operators",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --recursive modules -r babel-polyfill -w --compilers js:babel-register"
+    "test": "mocha --recursive modules -r babel-polyfill -w --compilers js:babel-register",
+    "test:doc": "markdown-doctest"
   },
   "author": "Vladimir Danchenkov <vladimir.danchenkov@gmail.com>",
   "license": "MIT",
@@ -18,6 +19,7 @@
     "chai": "^3.5.0",
     "eslint": "^3.0.1",
     "eslint-config-rackt": "^1.1.1",
-    "eslint-plugin-mocha": "^4.0.0"
+    "eslint-plugin-mocha": "^4.0.0",
+    "markdown-doctest": "^0.8.1"
   }
 }
