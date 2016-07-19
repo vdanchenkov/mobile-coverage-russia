@@ -1,1 +1,5 @@
-export default () => () => 0
+export default () => {
+  const func = () => 0
+  func.useFetch = () => {}
+  return func
+}
