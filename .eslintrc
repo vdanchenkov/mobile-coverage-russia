@@ -8,5 +8,9 @@
   },
   "plugins": [
     "mocha"
-  ]
+  ],
+  "globals": {
+    "expect": true,
+    "sinon": true
+  }
 }

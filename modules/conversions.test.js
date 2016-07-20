@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { lonLatToPixel, meterToPixel } from './conversions'
 
 describe('conversions', () => {

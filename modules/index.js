@@ -1,5 +1,5 @@
 import { lonLatToPixel, meterToPixel } from './conversions'
-import { mts3G } from './operators'
+import { mts3G } from './tileSources'
 import coverage from './coverage'
 
 const mts3GCoverage = (zoom) => coverage(mts3G, zoom)
