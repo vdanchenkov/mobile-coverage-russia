@@ -23,5 +23,8 @@
     "markdown-doctest": "^0.8.1",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "pngparse": "^2.0.1"
   }
 }
