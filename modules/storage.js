@@ -10,7 +10,8 @@ export default () => {
       return undefined
     }
     const tile = new Uint8Array(buffer)
-    return !!((tile[innerY * 256 + Math.floor((innerX % 256) / 8)] >> (innerX % 8)) & 1)
+    const mask = 1 << innerX % 8
+    return !!(tile[innerY * 256 + Math.floor((innerX % 256) / 8)] & mask)
   }
   /**
    *

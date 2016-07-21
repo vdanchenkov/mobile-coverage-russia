@@ -25,6 +25,6 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "pngparse": "^2.0.1"
+    "pngparse-sync": "^1.0.2"
   }
 }
