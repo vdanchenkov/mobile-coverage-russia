@@ -1,4 +1,5 @@
 import * as lib from './modules/index.js'
+import 'babel-polyfill'
 
 const { mts3G, lonLatToPixel } = lib
 

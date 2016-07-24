@@ -11,7 +11,7 @@ export default () => {
     }
     const tile = new Uint8Array(buffer)
     const mask = 1 << innerX % 8
-    return !!(tile[innerY * 256 + Math.floor((innerX % 256) / 8)] & mask)
+    return !!(tile[innerY * 32 + Math.floor(innerX / 8)] & mask)
   }
   /**
    *
