@@ -11,7 +11,7 @@ describe('coverage', () => {
   it('searches for fetch in global object (self object in browser)', () => {
     global.fetch = sinon.spy(fetchStub())
     const mts = coverage(() => '', 10)
-    mts([ 0, 0 ])
+    mts(0, 0)
     expect(global.fetch).to.have.been.called
     delete global.fetch
   })
@@ -19,7 +19,7 @@ describe('coverage', () => {
   it('correctly builds tile url', () => {
     global.fetch = sinon.spy(fetchStub({ 'http://example.com/10/3/7': new Uint8Array(0) }))
     const mts = coverage((z, x, y) => `http://example.com/${z}/${x}/${y}`, 10)
-    mts([ 3 * 256, 7 * 256 ])
+    mts(3 * 256, 7 * 256)
     expect(global.fetch).to.have.been.calledWith('http://example.com/10/3/7')
     delete global.fetch
   })
@@ -32,15 +32,21 @@ describe('coverage', () => {
     mts.useFetch(fetch)
 
     it('gets coverage data for point 38.460390, 55.606758', () => {
-      return mts([ 159078, 82370 ]).then((level) => {
+      return mts(159078, 82370).then((level) => {
         console.log(level)
         expect(level).to.be.ok
       })
     })
 
     it('gets coverage data for point with no coverage', () => {
-      return mts([ 159188, 82313 ]).then((level) => {
+      return mts(159188, 82313).then((level) => {
         expect(level).to.be.not.ok
+      })
+    })
+
+    it('accepts array of points', () => {
+      return mts([ [ 159188, 82313 ], [ 159078, 82370 ] ]).then((level) => {
+        expect(level).to.be.eql([ false, true ])
       })
     })
   })
