@@ -1,11 +1,9 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
 import parseImage from './parseImage'
+import { rawImage } from './../test-helpers/fixtureA'
 
 describe('parseImage', () => {
-  it('parses mts 3g sample 10.621.321.png', () => {
-    const image = readFileSync(join(__dirname, '..', 'test-helpers', '10.621.321.png'))
-    const result = parseImage(image)
+  it('parses mts 3g sample A', () => {
+    const result = parseImage(rawImage)
     expect(result.byteLength).to.be.eql(256 * 32)
     const array = new Uint8Array(result)
     const byteAt = (x, y) => array[y * 32 + Math.floor(x / 8)]

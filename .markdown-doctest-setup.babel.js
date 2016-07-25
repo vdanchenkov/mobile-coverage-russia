@@ -1,5 +1,7 @@
 import * as lib from './modules/index.js'
 import 'babel-polyfill'
+import nock from 'nock'
+import { mockHttp } from './test-helpers/fixtureA'
 
 const { mts3G, lonLatToPixel } = lib
 
@@ -9,8 +11,10 @@ export const require = {
 
 export const globals = {
   mts3G,
-  lonLatToPixel,
-  fetch: () => ({})
+  lonLatToPixel
 }
 
-global.fetch = () => ({})
+nock.disableNetConnect()
+export const beforeEach = () => {
+  mockHttp()
+}
