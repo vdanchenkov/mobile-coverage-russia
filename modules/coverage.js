@@ -2,7 +2,7 @@ import parseImage from './parseImage'
 import createStorage from './storage'
 import request from './request'
 
-export default (tileUrl, zoom) => {
+export default (tileUrl, zoom, interpolation = 0) => {
   const storage = createStorage()
 
   const func = async (x, y) => {
@@ -13,16 +13,25 @@ export default (tileUrl, zoom) => {
       }
       return result
     }
-    let value = storage.get(x, y)
-    if (typeof value === 'boolean') {
-      return value
-    } else {
-      const tileX = x / 256 | 0
-      const tileY = y / 256 | 0
+
+    const tileX = x >> 8 - interpolation
+    const tileY = y >> 8 - interpolation
+    if (!storage.haveTile(tileX, tileY)) {
       const buffer = await request(tileUrl(zoom, tileX, tileY))
       storage.setTile(tileX, tileY, parseImage(buffer))
-      return storage.get(x, y)
     }
+
+    const baseX = x << interpolation
+    const baseY = y << interpolation
+
+    const range = 1 << interpolation
+    let level = 0
+    for(let ix = 0; ix < range; ix++ ) {
+      for(let iy = 0; iy < range; iy++ ) {
+        level += storage.get(baseX + ix, baseY + iy)
+      }
+    }
+    return level / Math.pow(range, 2)
   }
   return func
 }

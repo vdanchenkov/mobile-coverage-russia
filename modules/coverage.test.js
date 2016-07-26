@@ -9,19 +9,19 @@ describe('coverage', () => {
 
     it('gets coverage data for point 38.460390, 55.606758', () => {
       return mts(159078, 82370).then((level) => {
-        expect(level).to.be.ok
+        expect(level).to.be.eql(1)
       })
     })
 
     it('gets coverage data for point with no coverage', () => {
       return mts(159188, 82313).then((level) => {
-        expect(level).to.be.not.ok
+        expect(level).to.be.eql(0)
       })
     })
 
     it('accepts array of points', () => {
       return mts([ [ 159188, 82313 ], [ 159078, 82370 ] ]).then((level) => {
-        expect(level).to.be.eql([ false, true ])
+        expect(level).to.be.eql([ 0, 1 ])
       })
     })
   })

@@ -10,6 +10,10 @@ Major mobile operators in Russia provide coverage maps in a form of tiles for Ya
 
 ## Usage
 
+Module exports utility function ```lonLatToPixel(zoom, [longitude, latitude])``` which converts geographic coordinates to pixel coordinates in the projection used on coverage maps. We decided to leave explicit conversion to the user because in many cases he will need to process coordinates in one way or another.
+   
+Main functionality is encapsulated in exported factories with names like ```mts2G, mts3G```. Each supported map have one specific factory.    
+
 ```es6
 import { lonLatToPixel, mts3G } from 'mobile-coverage-russia'
 
@@ -42,11 +46,15 @@ for(let x = nw[0]; x < se[0]; x++) {
 }
 
 coverage(pixels)
-  .then((levels) => levels.reduce((acc, level) => acc + ~~level, 0))
+  .then((levels) => levels.reduce((acc, level) => acc + level, 0))
   .then((level) => { console.log(level / pixels.length) })
   .catch(e => console.error(e))
-```
-                                          
+```                                  
+           
+### Interpolation
+
+TODO
+
 ## Supported maps
 ### MTS
 Available zoom levels: 7 - 12
