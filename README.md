@@ -47,3 +47,23 @@ coverage(pixels)
   .catch(e => console.error(e))
 ```
                                           
+## Supported maps
+### MTS
+Available zoom levels: 7 - 12
+Meaningful zoom levels: 7 - 10
+
+Maps:      
+
+- mts2G
+- mts3G
+- mts4G
+- mts4GPlan
+
+### Megafon
+Available zoom levels: 5 - 12
+Meaningful zoom levels: 5 - 10
+  
+- megafon2G (support is in progress)
+- megafon3G
+- megafon4G
+- megafon4GPlus   
