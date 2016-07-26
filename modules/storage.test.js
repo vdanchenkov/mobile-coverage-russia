@@ -31,4 +31,17 @@ describe('storage', () => {
     const s = storage()
     expect(s.get(0, 0)).to.be.undefined
   })
+
+  it('reports tile presence', () => {
+    const s = storage()
+    const tile = new ArrayBuffer(256 * 256 / 8)
+    new Uint8Array(tile)[32 * 10 + 10] = 0x4
+    s.setTile(2, 7, tile)
+    expect(s.haveTile(2, 7)).to.be.ok
+  })
+
+  it('reports tile absence', () => {
+    const s = storage()
+    expect(s.get(0, 0)).to.be.not.ok
+  })
 })

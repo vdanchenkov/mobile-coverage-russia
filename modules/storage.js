@@ -22,8 +22,14 @@ export default () => {
   const setTile = (x, y, buffer) => {
     storage[[ x,y ].join(':')] = buffer
   }
+
+  const haveTile = (x, y) => {
+    return storage[[ x,y ].join(':')] !== undefined
+  }
+
   return {
     get,
-    setTile
+    setTile,
+    haveTile
   }
 }
