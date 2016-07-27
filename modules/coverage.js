@@ -16,9 +16,9 @@ export default (tileUrl, zoom, interpolation = 0) => {
 
     const tileX = x >> 8 - interpolation
     const tileY = y >> 8 - interpolation
-    if (!storage.haveTile(tileX, tileY)) {
+    if (!storage.haveTile(zoom, tileX, tileY)) {
       const buffer = await request(tileUrl(zoom, tileX, tileY))
-      storage.setTile(tileX, tileY, parseImage(buffer))
+      storage.setTile(zoom, tileX, tileY, parseImage(buffer))
     }
 
     const baseX = x << interpolation
@@ -28,7 +28,7 @@ export default (tileUrl, zoom, interpolation = 0) => {
     let level = 0
     for(let ix = 0; ix < range; ix++ ) {
       for(let iy = 0; iy < range; iy++ ) {
-        level += storage.get(baseX + ix, baseY + iy)
+        level += storage.get(zoom, baseX + ix, baseY + iy)
       }
     }
     return level / Math.pow(range, 2)

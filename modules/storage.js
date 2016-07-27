@@ -2,8 +2,8 @@ export default () => {
   // TODO consider WeakMap
   const storage = {}
 
-  const get = (x, y) => {
-    const tileCoord = [ Math.floor(x / 256), Math.floor(y / 256) ]
+  const get = (zoom, x, y) => {
+    const tileCoord = [ zoom, Math.floor(x / 256), Math.floor(y / 256) ]
     const [ innerX, innerY ] = [ x % 256, y % 256 ]
     const buffer = storage[tileCoord.join(':')]
     if (!buffer) {
@@ -15,16 +15,17 @@ export default () => {
   }
   /**
    *
+   * @param zoom The zoom
    * @param x The x coordinate of tile
    * @param y The y coordinate of tile
    * @param Array buffer
    */
-  const setTile = (x, y, buffer) => {
-    storage[[ x,y ].join(':')] = buffer
+  const setTile = (zoom, x, y, buffer) => {
+    storage[[ zoom, x, y ].join(':')] = buffer
   }
 
-  const haveTile = (x, y) => {
-    return storage[[ x,y ].join(':')] !== undefined
+  const haveTile = (zoom, x, y) => {
+    return storage[[ zoom, x, y ].join(':')] !== undefined
   }
 
   return {
