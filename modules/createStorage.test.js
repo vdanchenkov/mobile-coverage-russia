@@ -1,9 +1,9 @@
-import storage from './storage'
+import createStorage from './createStorage'
 
-describe('storage', () => {
+describe('createStorage', () => {
   const zoom = 5
   it('works for first 3 pixels', () => {
-    const s = storage()
+    const s = createStorage()
     const tile = new ArrayBuffer(256 * 256 / 8)
     new Uint8Array(tile)[0] = 0x5
     s.setTile(zoom, 0, 0, tile)
@@ -13,7 +13,7 @@ describe('storage', () => {
   })
 
   it('works for pixels from the middle of 1st tile', () => {
-    const s = storage()
+    const s = createStorage()
     const tile = new ArrayBuffer(256 * 256 / 8)
     new Uint8Array(tile)[32 * 10 + 10] = 0x4
     s.setTile(zoom, 0, 0, tile)
@@ -21,7 +21,7 @@ describe('storage', () => {
   })
 
   it('works for pixels from the middle of arbitrary tile', () => {
-    const s = storage()
+    const s = createStorage()
     const tile = new ArrayBuffer(256 * 256 / 8)
     new Uint8Array(tile)[32 * 10 + 10] = 0x4
     s.setTile(zoom, 2, 7, tile)
@@ -29,12 +29,12 @@ describe('storage', () => {
   })
 
   it('return undefined if there is no data for specified pixel', () => {
-    const s = storage()
+    const s = createStorage()
     expect(s.get(zoom, 0, 0)).to.be.undefined
   })
 
   it('reports tile presence', () => {
-    const s = storage()
+    const s = createStorage()
     const tile = new ArrayBuffer(256 * 256 / 8)
     new Uint8Array(tile)[32 * 10 + 10] = 0x4
     s.setTile(zoom, 2, 7, tile)
@@ -42,7 +42,7 @@ describe('storage', () => {
   })
 
   it('reports tile absence', () => {
-    const s = storage()
+    const s = createStorage()
     expect(s.get(zoom, 0, 0)).to.be.not.ok
   })
 })

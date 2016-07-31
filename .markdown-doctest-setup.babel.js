@@ -1,9 +1,9 @@
-import * as lib from './modules/index.js'
 import 'babel-polyfill'
+import * as lib from './modules/index.js'
 import nock from 'nock'
 import { mockHttp } from './test-helpers/fixtureA'
 
-const { mts3G, lonLatToPixel } = lib
+const { mts3G, lonLatToPixel, createStorage } = lib
 
 export const require = {
   'mobile-coverage-russia': lib
@@ -11,7 +11,8 @@ export const require = {
 
 export const globals = {
   mts3G,
-  lonLatToPixel
+  lonLatToPixel,
+  createStorage
 }
 
 nock.disableNetConnect()

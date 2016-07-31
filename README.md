@@ -15,14 +15,12 @@ Module exports utility function ```lonLatToPixel(zoom, [longitude, latitude])```
 Main functionality is encapsulated in exported factories with names like ```mts2G, mts3G```. Each supported map have one specific factory.    
 
 ```es6
-import { lonLatToPixel, mts3G } from 'mobile-coverage-russia'
+import { createStorage, lonLatToPixel, mts3G } from 'mobile-coverage-russia'
 
 const zoom = 10
 const lngLat = [ 38.412416, 55.7048255 ]
 
-// coverage object will maintain data cache
-const coverage = mts3G(zoom)
-coverage(...lonLatToPixel(zoom, lngLat))
+mts3G(createStorage(), zoom, 0, lonLatToPixel(zoom, lngLat))
   .then((x) => console.log(x ? 'Have signal' : 'No signal'))
 ```
                 
@@ -34,7 +32,6 @@ const zoom = 10
 const westNorth = [ 38.412416, 55.7048255 ]
 const eastSouth = [ 38.605871, 55.677205 ]
 
-const coverage = mts3G(zoom)
 const nw = lonLatToPixel(zoom, westNorth)
 const se = lonLatToPixel(zoom, eastSouth)
 
@@ -45,13 +42,12 @@ for(let x = nw[0]; x < se[0]; x++) {
   }
 }
 
-coverage(pixels)
+mts3G(createStorage(), zoom, 0, pixels)
   .then((levels) => levels.reduce((acc, level) => acc + level, 0))
   .then((level) => { console.log(level / pixels.length) })
   .catch(e => console.error(e))
 ```                                  
            
-### Interpolation
 
 TODO
 
