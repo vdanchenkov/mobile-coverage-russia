@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 import * as lib from './modules/index.js'
 import nock from 'nock'
 import { mockHttp } from './test-helpers/fixtureA'
