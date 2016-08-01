@@ -46,10 +46,22 @@ mts3G(createStorage(), zoom, 0, pixels)
   .then((levels) => levels.reduce((acc, level) => acc + level, 0))
   .then((level) => { console.log(level / pixels.length) })
   .catch(e => console.error(e))
-```                                  
-           
+```                                   
 
-TODO
+Coverage functions support partial application for up to 4 arguments. Following invocations are equal.
+
+```es6
+const storage = createStorage()
+const zoom = 10
+const pixel = lonLatToPixel(zoom, [ 38.412416, 55.7048255 ])
+let promise
+
+promise = mts3G(storage, zoom, 0, pixel)
+ 
+// promise = mts3G(storage)(zoom, 0, pixel)
+
+// promise = mts3G(storage, zoom, 0)(pixel)
+```
 
 ## Supported maps
 ### MTS

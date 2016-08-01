@@ -26,6 +26,7 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
+    "lodash": "^4.14.1",
     "pngparse-sync": "^1.0.2"
   }
 }

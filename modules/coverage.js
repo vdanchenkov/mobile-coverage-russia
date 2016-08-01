@@ -1,5 +1,6 @@
 import parseImage from './parseImage'
 import request from './request'
+import curry from 'lodash/curry'
 
 const coverageAtPoint = (tileUrl, storage, zoom, interpolation) => async (x, y) => {
   const tileX = x >> 8 - interpolation
@@ -22,7 +23,7 @@ const coverageAtPoint = (tileUrl, storage, zoom, interpolation) => async (x, y) 
   return level / Math.pow(range, 2)
 }
 
-export default (tileUrl) => async (storage, zoom, interpolation, ...args) => {
+export default curry(async (tileUrl, storage, zoom, interpolation, ...args) => {
   const coverage = coverageAtPoint(tileUrl, storage, zoom, interpolation)
   if (args.length === 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
     return await coverage(args[0], args[1])
@@ -38,4 +39,4 @@ export default (tileUrl) => async (storage, zoom, interpolation, ...args) => {
   } else {
     throw Error(`Invalid arguments: ${args.join(',')}`)
   }
-}
+}, 5)
