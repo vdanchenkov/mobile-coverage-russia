@@ -1,7 +1,7 @@
-import { createStorage, lonLatToPixel, mts3G } from './../modules/index'
+import { createStorage, lonLatToPixel, mts3G, coverage } from './../modules/index'
 
 const zoom = 10
 const lngLat = [ 38.412416, 55.7048255 ]
 
-mts3G(createStorage(), zoom, 0, lonLatToPixel(zoom, lngLat))
+coverage(mts3G, createStorage(), zoom, 0, lonLatToPixel(zoom, lngLat))
   .then((x) => console.log(x ? 'Have signal' : 'No signal'))

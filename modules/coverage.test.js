@@ -1,13 +1,13 @@
 import coverage from './coverage'
 import createStorage from './createStorage'
-import { mts3G as mts3GSource } from './tileSources'
+import { mts3G } from './maps'
 import * as fixtureA from './../test-helpers/fixtureA'
 
 describe('coverage', () => {
   describe('sample A', () => {
     fixtureA.mockHttp()
     const storage = createStorage()
-    const mts = coverage(mts3GSource)
+    const mts = coverage(mts3G)
 
     it('gets coverage data for point 38.460390, 55.606758', () => {
       return mts(storage, 10, 0, 159078, 82370).then((level) => {

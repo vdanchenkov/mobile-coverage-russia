@@ -11,19 +11,18 @@ Major mobile operators in Russia provide coverage maps in a form of tiles for Ya
 ## Usage
 
 Module exports utility function ```lonLatToPixel(zoom, [longitude, latitude])``` which converts geographic coordinates to pixel coordinates in the projection used on coverage maps. We decided to leave explicit conversion to the user because in many cases he will need to process coordinates in one way or another.
-   
-Main functionality is encapsulated in exported factories with names like ```mts2G, mts3G```. Each supported map have one specific factory.    
+
 
 ```es6
-import { createStorage, lonLatToPixel, mts3G } from 'mobile-coverage-russia'
+import { createStorage, lonLatToPixel, coverage, mts3G } from 'mobile-coverage-russia'
 
 const zoom = 10
 const lngLat = [ 38.412416, 55.7048255 ]
 
-mts3G(createStorage(), zoom, 0, lonLatToPixel(zoom, lngLat))
+coverage(mts3G, createStorage(), zoom, 0, lonLatToPixel(zoom, lngLat))
   .then((x) => console.log(x ? 'Have signal' : 'No signal'))
 ```
-                
+
 Calculate average levels in square area
 
 ```es6
@@ -42,7 +41,7 @@ for(let x = nw[0]; x < se[0]; x++) {
   }
 }
 
-mts3G(createStorage(), zoom, 0, pixels)
+coverage(mts3G, createStorage(), zoom, 0, pixels)
   .then((levels) => levels.reduce((acc, level) => acc + level, 0))
   .then((level) => { console.log(level / pixels.length) })
   .catch(e => console.error(e))
@@ -56,12 +55,13 @@ const zoom = 10
 const pixel = lonLatToPixel(zoom, [ 38.412416, 55.7048255 ])
 let promise
 
-promise = mts3G(storage, zoom, 0, pixel)
- 
-// promise = mts3G(storage)(zoom, 0, pixel)
+promise = coverage(mts3G, storage, zoom, 0, pixel)
 
-// promise = mts3G(storage, zoom, 0)(pixel)
+// promise = coverage(mts3G, storage)(zoom, 0, pixel)
+
+// promise = coverage(mts3G, storage, zoom, 0)(pixel)
 ```
+
 
 ## Supported maps
 ### MTS
@@ -78,7 +78,7 @@ Maps:
 ### Megafon
 Available zoom levels: 5 - 12
 Meaningful zoom levels: 5 - 10
-  
+
 - megafon2G (support is in progress)
 - megafon3G
 - megafon4G

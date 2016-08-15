@@ -1,4 +1,4 @@
-import { mts3G, lonLatToPixel, createStorage } from './../modules/index'
+import { mts3G, lonLatToPixel, createStorage, coverage } from './../modules/index'
 
 const zoom = 10
 
@@ -15,7 +15,7 @@ for(let x = nw[0]; x < se[0]; x++) {
   }
 }
 
-mts3G(createStorage(), zoom, 0, pixels)
+coverage(mts3G, createStorage(), zoom, 0, pixels)
   .then((levels) => levels.reduce((acc, level) => acc + level, 0))
   .then((level) => { console.log(level / pixels.length) })
   .catch(e => console.error(e))

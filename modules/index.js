@@ -1,14 +1,18 @@
-export { lonLatToPixel, meterToPixel } from './conversions'
-export { default as createStorage } from './createStorage'
-import * as tileSources from './tileSources'
+import { lonLatToPixel } from './conversions'
+import createStorage from './createStorage'
+import { mts2G, mts3G, mts4G, mts4GPlan, megafon2G, megafon3G, megafon4G, megafon4GPlus } from './maps'
 import coverage from './coverage'
 
-export const mts2G = coverage(tileSources.mts2G)
-export const mts3G = coverage(tileSources.mts3G)
-export const mts4G = coverage(tileSources.mts4G)
-export const mts4GPlan = coverage(tileSources.mts4GPlan)
-
-export const megafon2G = coverage(tileSources.megafon2G)
-export const megafon3G = coverage(tileSources.megafon3G)
-export const megafon4G = coverage(tileSources.megafon4G)
-export const megafon4GPlus = coverage(tileSources.megafon4GPlus)
+export {
+  lonLatToPixel,
+  createStorage,
+  coverage,
+  mts2G,
+  mts3G, 
+  mts4G,
+  mts4GPlan,
+  megafon2G,
+  megafon3G,
+  megafon4G,
+  megafon4GPlus
+}
