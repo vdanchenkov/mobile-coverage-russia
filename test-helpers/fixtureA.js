@@ -10,3 +10,4 @@ export const mockHttp = () => {
 
 
 export const rawImage = readFileSync(join(__dirname, '10.621.321.png'))
+export const emptyImage = readFileSync(join(__dirname, 'empty.png'))
