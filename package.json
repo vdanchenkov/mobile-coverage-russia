@@ -1,6 +1,6 @@
 {
   "name": "mobile-coverage-russia",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Downoads and extracts mobile coverage data for Russian mobile operators",
   "main": "lib/index.js",
   "scripts": {
@@ -17,6 +17,9 @@
   "files": [
     "lib"
   ],
+  "browser": {
+    "./lib/request.js": "./lib/request-fetch.js"
+  },
   "author": "Vladimir Danchenkov <vladimir.danchenkov@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -38,6 +41,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.11.6",
+    "buffer": "^4.9.0",
     "lodash": "^4.14.1",
     "pngparse-sync": "^1.0.2"
   }
